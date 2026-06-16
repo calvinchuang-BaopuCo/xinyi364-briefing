@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>信義364 自辦公聽會｜投影版</title>
+<style>
+  :root{
+    --navy:#13325c; --blue:#1a4a85; --bright:#2f6db5; --blue-l:#e8f1fb;
+    --green:#2e9e6b; --green-l:#e2f3ea;
+    --amber:#e0a020; --amber-l:#fdf2d6;
+    --red:#c0392b; --red-l:#fbe4e4;
+    --line:#d6deea; --grey:#5a6b82; --hl:#fff7cc; --ink:#1a2330; --bg:#eef1f6;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{counter-reset:slide; font-family:"Microsoft JhengHei","微軟正黑體","PingFang TC","Heiti TC",sans-serif;
+    color:var(--ink); background:#0b1c33; -webkit-font-smoothing:antialiased;
+    scroll-snap-type:y mandatory; overflow-x:hidden;}
+
+  /* ===== 每屏一張 ===== */
+  .slide{counter-increment:slide; min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    padding:5vh 5vw; position:relative; background:var(--bg);}
+  .slide.dark{background:linear-gradient(135deg,var(--navy),var(--bright)); color:#fff;}
+  .slide + .slide{border-top:none;}
+
+  /* slide 編號 */
+  .pageno::before{content:counter(slide);}
+  .pageno{position:absolute; right:3vw; bottom:3vh; font-size:1.8vh; color:var(--grey); opacity:.7;}
+  .slide.dark .pageno{color:#fff; opacity:.55;}
+
+  /* eyebrow + 白話大標 */
+  .eyebrow{font-size:2.6vh; font-weight:700; letter-spacing:.3vh; color:var(--bright); margin-bottom:1.4vh;}
+  .slide.dark .eyebrow{color:var(--hl);}
+  .htitle{font-size:6.4vh; font-weight:800; color:var(--navy); line-height:1.2; text-align:center;}
+  .slide.dark .htitle{color:#fff;}
+  .htitle.sm{font-size:5.2vh;}
+  .sub{font-size:3.2vh; color:var(--grey); margin-top:2vh; text-align:center; line-height:1.6;}
+  .slide.dark .sub{color:rgba(255,255,255,.92);}
+
+  /* ===== 封面 ===== */
+  .cover .sq{width:2.4vh; height:7vh; background:var(--hl); border-radius:.5vh; margin-bottom:3vh;}
+  .cover h1{font-size:7.4vh; font-weight:800; color:#fff; line-height:1.25; text-align:center;}
+  .cover .meta{font-size:3vh; color:rgba(255,255,255,.9); margin-top:3vh; text-align:center; line-height:1.7;}
+  .cover .chips{margin-top:4vh; display:flex; gap:1.5vh; flex-wrap:wrap; justify-content:center;}
+  .cover .chip{font-size:2.5vh; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.34);
+    border-radius:5vh; padding:1.2vh 2.6vh;}
+
+  /* ===== Section 1：達標儀表 ===== */
+  .rings{display:flex; gap:8vw; margin:4vh 0 3vh; flex-wrap:wrap; justify-content:center;}
+  .gauge{display:flex; flex-direction:column; align-items:center; text-align:center;}
+  .ring{width:34vh; height:34vh; border-radius:50%; display:flex; align-items:center; justify-content:center;}
+  .ring.land{background:conic-gradient(var(--green) 0 88.72%, #d4dde8 88.72% 100%);}
+  .ring.ppl{background:conic-gradient(var(--bright) 0 81.40%, #d4dde8 81.40% 100%);}
+  .ring .hole{width:25vh; height:25vh; border-radius:50%; background:#fff;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .ring .pct{font-size:7vh; font-weight:800; line-height:1;}
+  .ring.land .pct{color:var(--green);} .ring.ppl .pct{color:var(--bright);}
+  .ring .lab{font-size:2.2vh; color:var(--grey); margin-top:.6vh;}
+  .gauge .name{font-size:3.4vh; font-weight:800; color:var(--navy); margin-top:2.2vh;}
+  .gauge .meta{font-size:2.4vh; color:var(--grey); margin-top:.8vh;}
+  .gauge .pass{margin-top:1.4vh; font-size:2.6vh; font-weight:800; color:#1d6b46;
+    background:var(--green-l); border:1px solid #b7e0c8; border-radius:5vh; padding:.8vh 2.4vh;}
+
+  .hu-strip{display:flex; gap:2.5vw; margin-top:2vh; flex-wrap:wrap; justify-content:center;}
+  .hu{background:#fff; border:1px solid var(--line); border-radius:1.6vh; padding:2.4vh 3vw; text-align:center;
+    box-shadow:0 1vh 3vh rgba(19,50,92,.10); min-width:20vh;}
+  .hu .k{font-size:2.4vh; color:var(--grey);}
+  .hu .v{font-size:6vh; font-weight:800; color:var(--navy); line-height:1.05; margin-top:.4vh;}
+  .hu .v small{font-size:2.6vh; font-weight:700; color:var(--grey);}
+  .hu.warn .v{color:var(--amber);}
+
+  /* 未完成門牌名單 */
+  .todo{display:flex; gap:3vw; margin:4vh 0 2vh; flex-wrap:wrap; justify-content:center; align-items:flex-start;}
+  .tcol{background:#fff; border:1px solid var(--line); border-radius:1.8vh; padding:2.4vh 2.2vw; min-width:23vw;
+    box-shadow:0 1vh 3vh rgba(19,50,92,.10);}
+  .tcol .th{font-size:2.9vh; font-weight:800; color:#fff; border-radius:1vh; padding:1vh 1.6vh; text-align:center; margin-bottom:1.6vh;}
+  .tcol.red .th{background:var(--red);}
+  .tcol.amber .th{background:var(--amber);}
+  .tcol.grey .th{background:var(--grey);}
+  .tcol ul{list-style:none;}
+  .tcol li{font-size:3.6vh; font-weight:800; color:var(--navy); padding:1vh 0; border-bottom:1px dashed var(--line); text-align:center; line-height:1.2;}
+  .tcol li:last-child{border-bottom:none;}
+  .tcol li small{display:block; font-size:2vh; font-weight:600; color:var(--grey); margin-top:.3vh;}
+
+  /* 台積電換算 */
+  .tsmc{display:flex; align-items:center; gap:5vw; margin-top:4vh; flex-wrap:wrap; justify-content:center;}
+  .tsmc-l{text-align:center;}
+  .tsmc-l .tnum{font-size:15vh; font-weight:800; color:var(--red); line-height:1;}
+  .tsmc-l .tnum small{font-size:5vh;}
+  .tsmc-l .tcap{font-size:3vh; color:var(--grey); margin-top:2vh; line-height:1.6;}
+  .tsmc-l .tcap b{color:var(--navy);}
+  .tsmc-r img{max-width:42vw; max-height:56vh; width:auto; height:auto; border-radius:1.4vh;
+    border:1px solid var(--line); box-shadow:0 1.5vh 4vh rgba(0,0,0,.22);}
+
+  /* 外觀揭示（滿版圖） */
+  .show{background-size:cover; background-position:center;}
+  .show::after{content:""; position:absolute; inset:0; z-index:0;
+    background:linear-gradient(180deg, rgba(11,28,51,.55), rgba(11,28,51,.2) 40%, rgba(11,28,51,.7));}
+  .show > *{position:relative; z-index:1;}
+  .show .eyebrow{color:var(--hl);}
+  .show .htitle{color:#fff; text-shadow:0 .3vh 2vh rgba(0,0,0,.6);}
+  .show .sub{color:rgba(255,255,255,.95); text-shadow:0 .2vh 1vh rgba(0,0,0,.5);}
+  .show .cap{position:absolute; bottom:6vh; left:50%; transform:translateX(-50%); z-index:1;
+    font-size:2.8vh; font-weight:700; color:#fff; background:rgba(19,50,92,.55);
+    border:1px solid rgba(255,255,255,.32); border-radius:5vh; padding:1vh 3vh; text-shadow:0 .1vh .6vh rgba(0,0,0,.5);}
+  .portrait img{max-height:80vh; max-width:62vw; width:auto; height:auto; border-radius:1.4vh;
+    box-shadow:0 1.5vh 5vh rgba(0,0,0,.45);}
+
+  /* 房型家配總覽 */
+  .plans{display:grid; grid-template-columns:repeat(5,1fr); gap:1.4vw; width:94vw; max-width:1750px; margin-top:3.5vh;}
+  .pcard{background:#fff; border:1px solid var(--line); border-radius:1.4vh; padding:1.2vh;
+    box-shadow:0 1vh 3vh rgba(19,50,92,.10); display:flex; flex-direction:column;}
+  .pcard .pimg{height:56vh; display:flex; align-items:center; justify-content:center; background:#f6f9fd;
+    border-radius:1vh; overflow:hidden;}
+  .pcard .pimg img{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain;}
+  .pcard .plab{font-size:2.8vh; font-weight:800; color:var(--navy); text-align:center; margin-top:1vh;}
+  /* 房型單張大圖 */
+  .planslide{padding:3vh 3vw;}
+  .planslide .plab2{font-size:3.8vh; font-weight:800; color:var(--navy); margin-bottom:1.2vh;}
+  .planslide .plab2 small{font-size:2.4vh; font-weight:600; color:var(--grey); margin-left:1vh;}
+  .planslide img{max-height:80vh; max-width:94vw; width:auto; height:auto; border-radius:1.2vh;
+    background:#fff; box-shadow:0 1.5vh 4vh rgba(19,50,92,.18);}
+
+  /* 本案特色 6 格 */
+  .feat{display:grid; grid-template-columns:repeat(3,1fr); gap:2.4vw; margin-top:4vh; width:88vw; max-width:1500px;}
+  .fcard{background:#fff; border:1px solid var(--line); border-radius:1.8vh; padding:3vh 1.6vw; text-align:center;
+    box-shadow:0 1vh 3vh rgba(19,50,92,.10);}
+  .fcard.blue{border-top:.8vh solid var(--bright);}
+  .fcard.warm{border-top:.8vh solid var(--amber);}
+  .fcard .ic{font-size:6.5vh; line-height:1;}
+  .fcard .ft{font-size:3.4vh; font-weight:800; color:var(--navy); margin:1.4vh 0 .8vh;}
+  .fcard .fd{font-size:2.4vh; color:var(--grey); line-height:1.5;}
+
+  /* ===== Section 2：時程差（兩軌時間軸） ===== */
+  .tl{width:92vw; max-width:1550px; margin:3vh 0 1vh;}
+  .tl-row{display:flex; align-items:center; gap:2vw; margin-bottom:3vh;}
+  .tl-name{flex:0 0 17vw; font-size:3vh; font-weight:800; text-align:right; line-height:1.35;}
+  .tl-name.a{color:var(--green);} .tl-name.b{color:var(--red);}
+  .tl-name small{display:block; font-size:2.1vh; font-weight:600; color:var(--grey);}
+  .tl-right{flex:1;}
+  .tl-bar{display:flex; height:6vh; border-radius:1vh; overflow:hidden; background:#e3e9f1;}
+  .tseg{height:100%; display:flex; align-items:center; justify-content:center; font-size:2vh; font-weight:700;
+    color:#fff; white-space:nowrap; overflow:hidden;}
+  .tseg.prep{background:var(--grey);}
+  .tseg.rev168{background:var(--green);}
+  .tseg.rev{background:var(--bright);}
+  .tseg.permit{background:var(--amber); color:#5a3d00;}
+  .tseg.self{background:#1d6b46;}
+  .tseg.daichai{background:var(--red);}
+  .tseg.empty{background:transparent;}
+  .chips2{display:flex; gap:1vw; margin-top:1.4vh; flex-wrap:wrap;}
+  .mchip{font-size:2.2vh; font-weight:700; background:#fff; border:1px solid var(--line); border-radius:5vh;
+    padding:.7vh 1.8vh; color:var(--navy);}
+  .mchip b{color:var(--ink);}
+  .mchip.hot{border:2px solid var(--red); color:var(--red);}
+  .mchip.hot b{color:var(--red);}
+  .cause{font-size:2.9vh; font-weight:700; background:#fff; border:1px solid var(--line); border-radius:1.4vh;
+    padding:2vh 3vw; margin:1.5vh 0; box-shadow:0 1vh 3vh rgba(19,50,92,.08); text-align:center; line-height:1.7;}
+  .cause .g{color:var(--green);} .cause .r{color:var(--red);}
+  .gapbig{font-size:5vh; font-weight:800; color:var(--red); margin-top:2vh; text-align:center; line-height:1.3;}
+
+  /* ===== Section 2：損失算法屏 ===== */
+  .math{font-size:5.2vh; font-weight:800; color:var(--navy); margin:4vh 0 2vh; text-align:center; line-height:1.4;}
+  .math .x{color:var(--bright); margin:0 1.5vh;}
+  .bignum{font-size:17vh; font-weight:800; line-height:1; color:var(--red); text-align:center;}
+  .bignum.green{color:var(--green);} .bignum.navy{color:var(--navy);}
+  .bigunit{font-size:4vh; font-weight:800; color:var(--red); text-align:center; margin-top:1vh;}
+  .perhu{margin-top:3vh; font-size:4.4vh; font-weight:800; color:var(--ink); text-align:center;}
+  .perhu b{color:var(--red); font-size:5.4vh;}
+
+  /* 青春屏 */
+  .youth .big{font-size:18vh; font-weight:800; color:var(--hl); line-height:1; text-align:center; margin:3vh 0;}
+  .youth .line{font-size:4vh; font-weight:700; line-height:1.7; text-align:center; max-width:1100px;}
+  .youth .line b{color:var(--hl);}
+
+  /* 損失對照（保守 vs 積極） */
+  .compare{display:flex; gap:4vw; margin-top:3vh; flex-wrap:wrap; justify-content:center;}
+  .ccard{background:#fff; border:2px solid var(--line); border-radius:2vh; padding:3vh 4vw; text-align:center;
+    box-shadow:0 1vh 3vh rgba(19,50,92,.10); min-width:34vw;}
+  .ccard .ct{font-size:3vh; font-weight:800; color:var(--navy);}
+  .ccard .cv{font-size:8vh; font-weight:800; color:var(--red); line-height:1.1; margin:1vh 0;}
+  .ccard .cp{font-size:3vh; color:var(--grey);} .ccard .cp b{color:var(--ink);}
+
+  /* ===== Section 3：代拆 ===== */
+  .case-slide{padding:3vh 4vw;}
+  .case-top{display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1300px; margin-bottom:2vh;}
+  .case-top .ct{font-size:4.4vh; font-weight:800; color:var(--navy);}
+  .case-top .ct small{font-size:2.6vh; font-weight:600; color:var(--grey); margin-left:1.5vh;}
+  .case-top .rk{font-size:2.6vh; font-weight:800; color:#fff; background:var(--navy); border-radius:5vh; padding:1vh 2.6vh;}
+  .case-img{flex:1; display:flex; align-items:center; justify-content:center; width:100%; min-height:0;}
+  .case-img img{max-width:92vw; max-height:62vh; width:auto; height:auto; border-radius:1vh;
+    box-shadow:0 1.5vh 4vh rgba(0,0,0,.35);}
+  .case-metric{width:100%; max-width:1300px; margin-top:2vh; background:linear-gradient(135deg,var(--blue),var(--bright));
+    color:#fff; border-radius:1.6vh; padding:2.2vh 3vw; display:flex; align-items:center;
+    justify-content:space-between; gap:2vw; flex-wrap:wrap;}
+  .case-metric .flow{font-size:3vh; font-weight:600;} .case-metric .flow b{color:var(--hl); font-weight:800;}
+  .case-metric .flow .arrow{margin:0 1.4vh; opacity:.85;}
+  .case-metric .big{display:flex; align-items:baseline; gap:1.5vh;}
+  .case-metric .big .l{font-size:2.4vh; opacity:.9;}
+  .case-metric .big .v{font-size:6vh; font-weight:800; color:var(--hl); line-height:1;}
+  .case-metric .big .s{font-size:2.4vh; opacity:.85;}
+
+  .lead-box{background:#fff; border-left:1.2vh solid var(--bright); border-radius:1.4vh;
+    padding:4vh 5vw; font-size:4vh; line-height:1.7; max-width:1200px; box-shadow:0 1vh 3vh rgba(19,50,92,.12);}
+  .lead-box b{color:var(--navy);} .lead-box .hl{color:var(--red); font-weight:800;}
+
+  /* 導覽提示 */
+  .hint{position:fixed; left:50%; bottom:2vh; transform:translateX(-50%); z-index:50;
+    font-size:1.8vh; color:#fff; background:rgba(19,50,92,.7); border-radius:5vh; padding:.8vh 2vh;
+    pointer-events:none; transition:opacity .5s;}
+
+  @media print{ .hint{display:none;} .slide{min-height:auto; page-break-after:always;} }
+</style>
+</head>
+<body>
+
+  <!-- ===== 0. 封面 ===== -->
+  <section class="slide dark cover">
+    <span class="sq"></span>
+    <h1>信義364 自辦公聽會</h1>
+    <div class="meta">大安區大安段一小段364地號等19筆土地都市更新案<br>寶舖建設集團開發部</div>
+    <div class="chips">
+      <span class="chip">我們走到哪了</span>
+      <span class="chip">晚兩年多虧多少</span>
+      <span class="chip">不簽，最後還是會拆</span>
+    </div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 0b. 恭喜地主（開頭） ===== -->
+  <section class="slide dark">
+    <div class="eyebrow">首先，恭喜各位地主 🎉</div>
+    <div class="htitle">更新完成後，每戶資產價值<br>最少 8,200 萬、上看 1.16 億</div>
+    <div class="bignum" style="color:var(--hl); margin:4vh 0 1vh; font-size:12vh;">8,200萬 ～ 1.16億</div>
+    <div class="sub">全案分回總價值約 <b>61.54 億</b>，依各戶分回坪數不同，<br>每戶價值 <b>最少約 8,200 萬、最高上看 1.16 億</b></div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 0c. 換算台積電 ===== -->
+  <section class="slide">
+    <div class="eyebrow">把「破億」換個方式想</div>
+    <div class="htitle sm">恭喜！每戶最少都拿到 <span style="color:var(--red);">35 張台積電</span></div>
+    <div class="tsmc">
+      <div class="tsmc-l">
+        <div class="tnum">35<small> 張起跳</small></div>
+        <div class="tcap">每戶分回 <b>8,200萬 ～ 1.16億</b><br>一張台積電約 236.5 萬（6/5 約 2,365 元）<br>≈ <b>35 ～ 49 張</b></div>
+      </div>
+      <div class="tsmc-r"><img src="台積電股價.png" alt="台積電 6/5 股價 2,365 元"></div>
+    </div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 1. 執行狀況 ===== -->
+  <section class="slide">
+    <div class="eyebrow">目前整合進度</div>
+    <div class="htitle">我們走到哪了？差一步就到</div>
+    <div class="rings">
+      <div class="gauge">
+        <div class="ring land"><div class="hole"><span class="pct">88.72%</span><span class="lab">門檻只要 75%</span></div></div>
+        <div class="name">土地面積</div>
+        <div class="meta">同意 570 坪 ／ 共 643 坪</div>
+        <span class="pass">✓ 早就超過</span>
+      </div>
+      <div class="gauge">
+        <div class="ring ppl"><div class="hole"><span class="pct">81.40%</span><span class="lab">門檻只要 75%</span></div></div>
+        <div class="name">人數（所有權人）</div>
+        <div class="meta">同意 70 人 ／ 共 86 人</div>
+        <span class="pass">✓ 早就超過</span>
+      </div>
+    </div>
+    <div class="sub" style="margin-top:3vh;">人數、土地<b style="color:var(--green);">雙雙超過 75% 門檻</b>，全案早就具備推動條件</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 1b. 還差這幾戶（門牌名單） ===== -->
+  <section class="slide">
+    <div class="eyebrow">最後衝刺名單</div>
+    <div class="htitle sm">就差這幾戶，全村一起到終點</div>
+    <div class="todo">
+      <div class="tcol red">
+        <div class="th">完全未簽　5 戶</div>
+        <ul>
+          <li>27弄11號-1</li>
+          <li>27弄7之1號</li>
+          <li>27弄1號-1</li>
+          <li>27弄1號-2</li>
+          <li>29號</li>
+        </ul>
+      </div>
+      <div class="tcol amber">
+        <div class="th">持分人沒簽齊　2 戶</div>
+        <ul>
+          <li>41弄6號<small>公同共有5人，已簽2</small></li>
+          <li>37號-1<small>3人，已簽2</small></li>
+        </ul>
+      </div>
+      <div class="tcol grey">
+        <div class="th">只簽同意、待補合約　1 戶</div>
+        <ul>
+          <li>27弄7號<small>同意書已簽，合約待補</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub">門牌皆為「信義路四段30巷」起　｜　57 戶中已完成 49 戶、僅差 8 戶</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 2. 時程差（損失起手式） ===== -->
+  <section class="slide">
+    <div class="eyebrow">100% 同意 vs 非100%（要市府代拆）</div>
+    <div class="htitle sm">從「都更核定」就開始差，一路差到搬遷</div>
+
+    <!-- 兩軌時間軸（顧問校正定版 2026-06-05；月數自公聽會起算） -->
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-name a">🟢 100% 同意<small>走 168 快軌・免聽證</small></div>
+        <div class="tl-right">
+          <div class="tl-bar">
+            <div class="tseg prep" style="width:1.85%"></div>
+            <div class="tseg rev168" style="width:31.48%">168 審議</div>
+            <div class="tseg permit" style="width:12.96%">拆照建照</div>
+            <div class="tseg self" style="width:5.56%">自拆</div>
+            <div class="tseg empty" style="width:48.15%"></div>
+          </div>
+          <div class="chips2">
+            <span class="mchip">送件 <b>2026/7</b></span>
+            <span class="mchip hot">都更核定 <b>2027/12</b></span>
+            <span class="mchip">搬遷拆屋 <b>2028/10</b>（自行）</span>
+            <span class="mchip">開工 <b>2028/11</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-name b">🔴 非100% 同意<small>一般軌含聽證＋市府代拆</small></div>
+        <div class="tl-right">
+          <div class="tl-bar">
+            <div class="tseg prep" style="width:1.85%"></div>
+            <div class="tseg rev" style="width:51.85%">一般軌審議（含聽證）</div>
+            <div class="tseg permit" style="width:12.96%">拆照建照</div>
+            <div class="tseg daichai" style="width:33.34%">★ 市府代拆</div>
+          </div>
+          <div class="chips2">
+            <span class="mchip">送件 <b>2026/7</b></span>
+            <span class="mchip hot">都更核定 <b>2028/11</b></span>
+            <span class="mchip hot">搬遷拆屋 <b>2030/12</b>（市府代拆）</span>
+            <span class="mchip">開工 <b>2031/1</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cause"><b class="g">走168免聽證 → 核定就早 11 個月</b>；<b class="r">又免去市府代拆 → 搬遷拆屋再早 15 個月</b></div>
+    <div class="gapbig">合計差 26 個月 ≈ 晚 2 年 2 個月入住</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 2-1. 租金損失 ===== -->
+  <section class="slide">
+    <div class="eyebrow">第一種算法</div>
+    <div class="htitle sm">少收的房租，就這麼多</div>
+    <div class="math">分回房屋＋車位 837 萬/月<span class="x">×</span>26 個月</div>
+    <div class="bignum green">2.18 億</div>
+    <div class="bigunit" style="color:var(--green);">全體少收的租金（≈ 2 億 1,762 萬）</div>
+    <div class="perhu">平均一戶就少收 <b>約 382 萬</b></div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 2-2. 投資損失 ===== -->
+  <section class="slide">
+    <div class="eyebrow">第二種算法</div>
+    <div class="htitle sm">這筆錢拿去投資，年賺 5%</div>
+    <div class="math">分回總價值 61.54 億<span class="x">×</span>5%<span class="x">×</span>2.17 年</div>
+    <div class="bignum">6.67 億</div>
+    <div class="bigunit">這 26 個月本來能滾出的錢</div>
+    <div class="perhu">平均一戶等於少賺 <b>約 1,170 萬</b></div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 2-2b. 怎麼算都是虧 ===== -->
+  <section class="slide">
+    <div class="eyebrow">兩種算法擺一起</div>
+    <div class="htitle sm">結論都一樣：這 26 個月拖不起</div>
+    <div class="compare">
+      <div class="ccard">
+        <div class="ct">保守算（收租）</div>
+        <div class="cv" style="color:var(--green);">每戶 382 萬</div>
+        <div class="cp">全體 <b>2.18 億</b></div>
+      </div>
+      <div class="ccard">
+        <div class="ct">積極算（投資 5%）</div>
+        <div class="cv">每戶 1,170 萬</div>
+        <div class="cp">全體 <b>6.67 億</b></div>
+      </div>
+    </div>
+    <div class="sub" style="margin-top:4vh;">同一筆錢、不同用法，<b style="color:var(--red);">每戶少 382～1,170 萬</b>——拖越久，虧越多。</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 2-3. 青春（情緒高點） ===== -->
+  <section class="slide dark youth">
+    <div class="eyebrow">最重要的，錢還買不回來</div>
+    <div class="htitle">是回不來的 26 個月</div>
+    <div class="big">2 年 2 個月</div>
+    <div class="line">租金少收、投資少賺，將來都還補得回；<br><b>但這 2 年 2 個月的人生，補不回來。</b><br>長輩的身體、孩子的成長、全家盼的新家——都在等。</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 3. 代拆 開場 ===== -->
+  <section class="slide">
+    <div class="eyebrow">依《都市更新條例》第57條</div>
+    <div class="htitle">不簽，最後還是會拆<br>——只是拖很久</div>
+    <div class="lead-box" style="margin-top:5vh;">
+      臺北市實際發生的三個案子，不同意戶都只有 <b>1～3 戶</b>，<br>
+      但從核定到真的拆除，拖了 <span class="hl">2 年</span> 到 <span class="hl">6 年多</span>。<br>
+      程序「<b>會走完、但很慢</b>」——拖到最後，房子照樣拆，全體一起多等。
+    </div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 3-1. 木柵 ===== -->
+  <section class="slide case-slide">
+    <div class="case-top"><span class="ct">案例 ①　文山區 木柵段<small>公辦都更</small></span><span class="rk">最快 ／ 共 3</span></div>
+    <div class="case-img"><img src="代拆案例彙整/代拆案例-木柵.jpg" alt="文山區木柵段公辦都更案代拆現場"></div>
+    <div class="case-metric">
+      <div class="flow">核定 <b>110/4/15</b><span class="arrow">─►</span>拆除 <b>112/3/22</b>　｜　不同意戶 1 戶</div>
+      <div class="big"><span class="l">核定→拆除</span><span class="v">約 1 年 11 個月</span></div>
+    </div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 3-2. 吉林 ===== -->
+  <section class="slide case-slide">
+    <div class="case-top"><span class="ct">案例 ②　中山區 吉林段<small>都市更新</small></span><span class="rk">共 3</span></div>
+    <div class="case-img"><img src="代拆案例彙整/代拆案例-吉林.jpg" alt="中山區吉林段都更案代拆現場"></div>
+    <div class="case-metric">
+      <div class="flow">核定 <b>110/9/14</b><span class="arrow">─►</span>拆除 <b>114/3/27</b>　｜　不同意戶 1 戶 1 人</div>
+      <div class="big"><span class="l">核定→拆除</span><span class="v">約 3 年 6 個月</span></div>
+    </div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 3-3. 福星 ===== -->
+  <section class="slide case-slide">
+    <div class="case-top"><span class="ct">案例 ③　萬華區 福星段<small>都市更新</small></span><span class="rk">最久 ／ 共 3</span></div>
+    <div class="case-img"><img src="代拆案例彙整/代拆案例-萬華.jpg" alt="萬華區福星段都更案代拆現場"></div>
+    <div class="case-metric">
+      <div class="flow">核定 <b>106/2/16</b><span class="arrow">─►</span>拆除 <b>112/7/14</b>　｜　不同意戶 3 戶 2 人</div>
+      <div class="big"><span class="l">核定→拆除</span><span class="v">約 6 年 5 個月</span></div>
+    </div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 4. 回到本案：外觀揭示 ===== -->
+  <section class="slide show" style="background-image:url('建築_外觀渲染圖_IMO/79_South base view_20260604_1.2_IMO.png');">
+    <div class="eyebrow">講完最壞的，回到最好的</div>
+    <div class="htitle">這，就是我們要一起蓋的家</div>
+    <div class="sub">信義364 ｜ 外觀意象（IMO 渲染示意）</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 4-2. 視角：整棟意象（直幅） ===== -->
+  <section class="slide dark portrait">
+    <div class="eyebrow">外觀視角 ①｜整棟意象</div>
+    <img src="建築_外觀渲染圖_IMO/79_Hero shot_20260604_1.1_IMO.png" alt="信義364 整棟外觀意象">
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 4-2b. 視角：主立面（直幅） ===== -->
+  <section class="slide dark portrait">
+    <div class="eyebrow">外觀視角 ②｜主立面正向</div>
+    <img src="建築_外觀渲染圖_IMO/79_Main Facade_20260612_1.1_IMO_0.jpg" alt="信義364 主立面正向">
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 4-2c. 視角：街景立面（直幅） ===== -->
+  <section class="slide dark portrait">
+    <div class="eyebrow">外觀視角 ③｜東北側街景</div>
+    <img src="建築_外觀渲染圖_IMO/79_North _ East facade_20260612_1.1_IMO_0.jpg" alt="信義364 東北側街景立面">
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 4-3. 視角：街角透視 ===== -->
+  <section class="slide show" style="background-image:url('建築_外觀渲染圖_IMO/79_Base view _20260604_1.1_IMO.png');">
+    <div class="cap">外觀視角 ④｜街角透視</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 4-4. 視角：近景 ===== -->
+  <section class="slide show" style="background-image:url('建築_外觀渲染圖_IMO/79_West base viewZoomed _20260604_1.1_IMO.png');">
+    <div class="cap">外觀視角 ⑤｜近景立面</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 4-4b. 視角：陽台綠意近景 ===== -->
+  <section class="slide show" style="background-image:url('建築_外觀渲染圖_IMO/79_South close-up view_20260612_1.2_IMO_0.jpg');">
+    <div class="cap">外觀視角 ⑥｜陽台綠意・生活近景</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 4b. 本案特色 ===== -->
+  <section class="slide">
+    <div class="eyebrow">信義364 本案特色</div>
+    <div class="htitle sm">不只是新房子，是會照顧人的家</div>
+    <div class="feat">
+      <div class="fcard blue"><div class="ic">⚡</div><div class="ft">單層電表</div><div class="fd">一層一表，用電獨立、帳目清清楚楚</div></div>
+      <div class="fcard blue"><div class="ic">💧</div><div class="ft">單層水表</div><div class="fd">一層一表，用水獨立不糾紛</div></div>
+      <div class="fcard blue"><div class="ic">🚿</div><div class="ft">單層排水</div><div class="fd">管線各層獨立，不怕樓上漏到樓下</div></div>
+      <div class="fcard warm"><div class="ic">🌡️</div><div class="ft">全戶智慧環控</div><div class="fd">溫濕度、空氣、燈光一鍵到位</div></div>
+      <div class="fcard warm"><div class="ic">❤️</div><div class="ft">全戶健康偵測</div><div class="fd">即時守護，長輩居家更安心</div></div>
+    </div>
+    <div class="sub" style="margin-top:3.5vh;"><b style="color:var(--bright);">單層獨立設計</b> ＋ <b style="color:var(--amber);">全戶智慧健康</b>，住得安心、管得省心</div>
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 4c. 房型家配：一頁一張 ===== -->
+  <section class="slide">
+    <div class="eyebrow">室內家配・房型參考</div>
+    <div class="htitle sm">房型多種變化，總有一款適合您的家</div>
+    <div class="sub" style="margin-top:3vh;">以下 <b style="color:var(--bright);">A1／A2-1／A4／A6／A7</b> 共 5 種坪型格局，逐一介紹<br>細部家配以建築師現場展板為準</div>
+    <span class="pageno"></span>
+  </section>
+
+  <section class="slide planslide">
+    <div class="plab2">房型 A1<small>多種房型之一</small></div>
+    <img src="室內渲染/A1.png" alt="A1 房型家配">
+    <span class="pageno"></span>
+  </section>
+  <section class="slide planslide">
+    <div class="plab2">房型 A2-1<small>多種房型之一</small></div>
+    <img src="室內渲染/A2-1.png" alt="A2-1 房型家配">
+    <span class="pageno"></span>
+  </section>
+  <section class="slide planslide">
+    <div class="plab2">房型 A4<small>多種房型之一</small></div>
+    <img src="室內渲染/A4.png" alt="A4 房型家配">
+    <span class="pageno"></span>
+  </section>
+  <section class="slide planslide">
+    <div class="plab2">房型 A6<small>多種房型之一</small></div>
+    <img src="室內渲染/A6.png" alt="A6 房型家配">
+    <span class="pageno"></span>
+  </section>
+  <section class="slide planslide">
+    <div class="plab2">房型 A7<small>多種房型之一</small></div>
+    <img src="室內渲染/A7.jpg" alt="A7 房型家配">
+    <span class="pageno"></span>
+  </section>
+
+  <!-- ===== 結尾：聯絡窗口與現場諮詢時段 ===== -->
+  <section class="slide dark" style="text-align:center;">
+    <div class="eyebrow">有任何問題，隨時找我們</div>
+    <div class="htitle" style="color:#fff; font-size:5.4vh;">這條更新的路，我們陪您一起走完</div>
+
+    <div style="display:flex; gap:3vw; margin-top:4.5vh; width:90vw; max-width:1500px; align-items:stretch; justify-content:center;">
+      <!-- 左：承辦窗口 -->
+      <div style="flex:1; background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.28); border-radius:1.6vh; padding:3.6vh 3vw; text-align:left;">
+        <div style="font-size:3vh; font-weight:800; color:var(--hl); margin-bottom:2.4vh;">📞 承辦窗口</div>
+        <div style="font-size:2.7vh; line-height:2;">
+          寶舖建設　莊穎霖（Calvin）<br>
+          電話／LINE：<b>0963-029-408</b>（24 小時隨時聯絡）<br>
+          Email：calvinchuang@baopu.com.tw
+        </div>
+        <div style="font-size:2.4vh; margin-top:2.4vh; color:#cfe0f5;">🏢 辦公室｜台北市大安區信義路三段134巷90號1樓</div>
+      </div>
+
+      <!-- 右：方便諮詢時段 -->
+      <div style="flex:1; background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.28); border-radius:1.6vh; padding:3.6vh 3vw; text-align:left;">
+        <div style="font-size:3vh; font-weight:800; color:var(--hl); margin-bottom:2.4vh;">🗓️ 方便諮詢的時段</div>
+        <table style="width:100%; border-collapse:collapse; font-size:2.5vh;">
+          <tr style="border-bottom:1px solid rgba(255,255,255,.22);"><td style="padding:1.5vh 0; font-weight:700; width:40%;">06/17（三）</td><td style="padding:1.5vh 0;">15:00–17:00 ／ 18:00–19:30</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.22);"><td style="padding:1.5vh 0; font-weight:700;">06/24（三）</td><td style="padding:1.5vh 0;">15:00–17:00 ／ 18:00–19:30</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.22);"><td style="padding:1.5vh 0; font-weight:700;">07/01（三）</td><td style="padding:1.5vh 0;">15:00–17:00 ／ 18:00–19:30</td></tr>
+          <tr><td style="padding:1.5vh 0; font-weight:700;">07/04（六）</td><td style="padding:1.5vh 0;">10:00–12:00</td></tr>
+        </table>
+        <div style="font-size:2.2vh; margin-top:2.4vh; color:#cfe0f5;">歡迎現場來談，不用預約、來就有人 🌿</div>
+      </div>
+    </div>
+
+    <div class="sub" style="color:#cfe0f5; font-size:2.4vh; margin-top:4.5vh;">寶舖建設集團開發部 ｜ 信義364 都市更新案</div>
+    <span class="pageno"></span>
+  </section>
+
+  <div class="hint" id="hint">↓ 滾動／按 → 鍵換頁　｜　F11 全螢幕</div>
+
+<script>
+  // 簡報器／鍵盤翻頁：上下、左右、PageUp/Down、空白鍵
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  function current(){
+    const c = window.scrollY + window.innerHeight/2;
+    let idx = 0;
+    slides.forEach((s,i)=>{ if(s.offsetTop <= window.scrollY + 5) idx = i; });
+    return idx;
+  }
+  function go(n){
+    const i = Math.max(0, Math.min(slides.length-1, current()+n));
+    slides[i].scrollIntoView({behavior:'smooth'});
+  }
+  document.addEventListener('keydown', e=>{
+    if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); go(1); }
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); go(-1); }
+    else if(e.key==='Home'){ e.preventDefault(); slides[0].scrollIntoView({behavior:'smooth'}); }
+    else if(e.key==='End'){ e.preventDefault(); slides[slides.length-1].scrollIntoView({behavior:'smooth'}); }
+  });
+  // 幾秒後淡出提示
+  setTimeout(()=>{ const h=document.getElementById('hint'); if(h) h.style.opacity='0'; }, 4500);
+</script>
+</body>
+</html>
